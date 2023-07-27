@@ -1,2 +1,13 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<!-- src\routes\+page.svelte -->
+<script lang="ts">
+	import { onMount } from 'svelte';
+	let lib: typeof import('wasm-lib');
+
+	onMount(async () => {
+		lib = await import('wasm-lib');
+		await lib.default();
+		lib.greet();
+	});
+</script>
+
+<button on:click={() => lib.greet()}>Greet</button>
